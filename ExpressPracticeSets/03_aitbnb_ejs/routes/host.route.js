@@ -1,11 +1,9 @@
 import express from "express";
 import path from "path";
-import { fileURLToPath } from "url";
 
 
 const hostRouter = express.Router();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const homeDetails = [];
 // host UI routes
 hostRouter.get("/add-home", (req, res) => {
   res.sendFile(path.join(process.cwd(), "views", "addHome.html"));
@@ -13,7 +11,8 @@ hostRouter.get("/add-home", (req, res) => {
 
 // host response routes
 hostRouter.post("/add-home", (req, res) => {
-  console.log(req.body);
+
+  console.log(req.body.homeName);
   res.sendFile(path.join(process.cwd(), "views", "homeAdded.html"));
 });
 

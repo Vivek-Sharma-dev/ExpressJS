@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 
 const app = express();
 const PORT = 3000;
@@ -9,7 +8,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use()
 app.use((req, res, next) => {
   console.log(`The Method is ${req.method}`);
   next();

@@ -1,11 +1,13 @@
 {
-  "name": "02_aitbnb",
+  "name": "03_aitbnb",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "tailwind": "npx @tailwindcss/cli -i ./public/input.css -o ./public/output.css --watch",
+    "dev" : "nodemon app.js",
+    "start": "concurrently \"npm run tailwind\" \"npm run dev\""
   },
   "keywords": [],
   "author": "",
@@ -15,5 +17,9 @@
     "@tailwindcss/cli": "^4.3.3",
     "express": "^5.2.1",
     "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.4",
+    "install": "^0.13.0"
   }
 }
