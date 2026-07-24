@@ -1,6 +1,11 @@
-import express from "express"
+import express from "express";
 import hostRouter from "./routes/host.route.js";
+import userRouter from "./routes/user.route.js";
+import path from "path";
+import { fileURLToPath } from "url";
 const PORT = 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 // encoded form data
@@ -13,18 +18,12 @@ app.use((req, res, next) => {
 });
 
 // host routes
-app.use("/host",  hostRouter)
-
-app.get("/", (req, res) => {
-  res.send(`
-        <h1>Radhe Radhe everyone welcome to my task</h1>
-        <a href="/host/add-home">Add Home</a>
-        `);
-});
+app.use("/host", hostRouter);
+app.use("/", userRouter);
 
 // 404 page
 app.use((req, res) => {
-  res.status(404).send("404 page not found");
+  res.status(404).sendFile(path.join(__dirname, "./views/404.html"));
 });
 
 app.listen(PORT, () => {
