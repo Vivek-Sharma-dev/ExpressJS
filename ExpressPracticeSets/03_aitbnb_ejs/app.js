@@ -1,5 +1,5 @@
 import express from "express";
-import hostRouter from "./routes/host.route.js";
+import { hostRouter } from "./routes/host.route.js";
 import userRouter from "./routes/user.route.js";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -11,8 +11,9 @@ const app = express();
 // encoded form data
 app.use(express.urlencoded({ extended: true }));
 
+app.set("view engine", "ejs");
 
-app.use(express.static(path.join(process.cwd(), "public")))
+app.use(express.static(path.join(process.cwd(), "public")));
 
 // console method and past of every reqest
 app.use((req, res, next) => {
@@ -26,7 +27,7 @@ app.use("/", userRouter);
 
 // 404 page
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "./views/404.html"));
+  res.status(404).render("404", { title: "404 - Page Not Found", currentPage: "404"});
 });
 
 app.listen(PORT, () => {

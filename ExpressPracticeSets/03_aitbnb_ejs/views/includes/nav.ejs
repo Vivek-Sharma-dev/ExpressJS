@@ -1,0 +1,23 @@
+<!-- Header/Navbar -->
+<header class="sticky top-0 z-50 bg-white shadow-md border-b border-gray-200">
+  <div
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+  >
+    <h1 class="text-2xl font-bold text-red-600"><a href="/">Airbnb</a></h1>
+    <nav>
+      
+      <a
+        href="/"
+        class="<%= currentPage === "home" ? "bg-red-600 text-white" : "border border-red-600 text-red-600" %> inline-flex items-center px-6 py-2 font-medium rounded-lg hover:bg-red-700 hover:text-white transition-colors duration-200"
+      >
+        Home
+      </a>
+      <a
+        href="/host/add-home"
+        class="<%= currentPage === "add home" ? "bg-red-600 text-white" : "border border-red-600 text-red-600" %> inline-flex items-center px-6 py-2  font-medium rounded-lg hover:bg-red-700 hover:text-white transition-colors duration-200"
+      >
+        + Add Home
+      </a>
+    </nav>
+  </div>
+</header>
