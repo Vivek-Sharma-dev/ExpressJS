@@ -3,6 +3,7 @@ import { hostRouter } from "./routes/host.route.js";
 import userRouter from "./routes/user.route.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import { showErrorPage } from "./controllers/errors.js";
 const PORT = 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,9 +27,7 @@ app.use("/host", hostRouter);
 app.use("/", userRouter);
 
 // 404 page
-app.use((req, res) => {
-  res.status(404).render("404", { title: "404 - Page Not Found", currentPage: "404"});
-});
+app.use(showErrorPage);
 
 app.listen(PORT, () => {
   console.log(`server is running on port http://localhost:${PORT}`);
