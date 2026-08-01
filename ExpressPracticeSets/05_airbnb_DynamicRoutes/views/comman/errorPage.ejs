@@ -1,0 +1,111 @@
+<%- include('../includes/head', { title: title }) %>
+<style>
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+  
+  @keyframes slide-down {
+    from { 
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  .animate-slide-down {
+    animation: slide-down 0.6s ease-out;
+  }
+</style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <%- include('../includes/nav') %>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center justify-center">
+    <div class="w-full max-w-2xl">
+      <!-- Error Container -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden animate-slide-down">
+        <!-- Error Header -->
+        <div class="bg-linear-to-r from-red-500 to-orange-500 py-12 px-6 text-center">
+          <div class="inline-block animate-shake mb-6">
+            <div class="text-7xl">⚠️</div>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">
+            <%= title %>
+          </h1>
+          <p class="text-red-100 text-lg">Something went wrong</p>
+        </div>
+
+        <!-- Error Content -->
+        <div class="p-8 md:p-12">
+          <!-- Error Message -->
+          <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg mb-8">
+            <h2 class="font-bold text-red-900 mb-3">Error Details:</h2>
+            <p class="text-red-800 text-base leading-relaxed font-mono bg-white p-4 rounded border border-red-200 overflow-auto max-h-32">
+              <%= error %>
+            </p>
+          </div>
+
+          <!-- What You Can Do -->
+          <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg mb-8">
+            <h2 class="font-bold text-blue-900 mb-4">What You Can Do:</h2>
+            <ul class="space-y-3 text-blue-800">
+              <li class="flex items-start gap-3">
+                <span class="text-blue-600 font-bold mt-1">✓</span>
+                <span>Try refreshing the page</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-blue-600 font-bold mt-1">✓</span>
+                <span>Go back to the previous page</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-blue-600 font-bold mt-1">✓</span>
+                <span>Return to the home page</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-blue-600 font-bold mt-1">✓</span>
+                <span>Contact support if the problem persists</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="space-y-4 sm:space-y-0 sm:flex sm:gap-4 sm:justify-center">
+            <a
+              href="javascript:history.back()"
+              class="inline-flex items-center justify-center px-6 py-3 bg-gray-200 text-gray-800 font-bold rounded-lg hover:bg-gray-300 transition-all duration-200"
+            >
+              ← Go Back
+            </a>
+            <a
+              href="/"
+              class="inline-flex items-center justify-center px-6 py-3 bg-linear-to-r from-red-500 to-red-600 text-white font-bold rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              Go to Home
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Info -->
+      <div class="mt-10 text-center">
+        <p class="text-gray-500 text-sm">
+          If this error persists, please contact our support team or try again later.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <%- include('../includes/footer') %>
+</body>
+</html>

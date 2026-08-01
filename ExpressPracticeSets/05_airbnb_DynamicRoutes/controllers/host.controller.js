@@ -1,5 +1,4 @@
 import { Home } from "../models/home.js";
-import { registeredHomes } from "../routes/host.route.js";
 import { dataVarification } from "../utils/dataVarification.js";
 
 export const addHomeForm = (req, res) => {
@@ -20,7 +19,8 @@ export const addHome = (req, res) => {
   }
 
   const { homeName, price, location, rating, image } = req.body;
-  const home = new Home(homeName, price, location, rating, image);
+  const id = Math.random().toString();
+  const home = new Home(homeName, price, location, rating, image, id);
   home.save();
   res.render("host/homeAdded", {
     title: "Home Added Successfully",

@@ -21,7 +21,6 @@ const navLinks = [
             class="<%= currentPage === el.id ? "bg-red-600 text-white" : "border border-red-600 text-red-600" %> inline-flex items-center px-6 py-2 font-medium rounded-lg hover:bg-red-700 hover:text-white transition-colors duration-200"
           >
             <%= el.label %>
-            <% console.log("Current Page:", currentPage, "Link:", el.href); %>
           </a>
       <% }) %> 
     </nav>
