@@ -21,7 +21,7 @@ export class Home {
           console.error("Error writing to file:", err);
         } else {
           console.log("Data written to file successfully.");
-        } 
+        }
       });
     });
   }
@@ -41,6 +41,27 @@ export class Home {
     Home.getAllHomes((registeredHomes) => {
       const home = registeredHomes.find((home) => home.id === id);
       callBack(home);
+    });
+  }
+
+  static addFavouriteHome(homeId, callback) {
+    Home.getAllHomes((registeredHomes) => {
+      const home = registeredHomes.find((home) => home.id === homeId);
+      const isAlreadyFavourite = home.isFavourite || false;
+      if (isAlreadyFavourite) {
+        return callback(null);
+      }
+      home.isFavourite = true;
+      fs.writeFile(
+        path.join(process.cwd(), "/data/registeredHomes.json"),
+        JSON.stringify(registeredHomes),
+        (err) => {
+          if (err) {
+            console.error("Error writing to file:", err);
+          }
+        }
+      );
+      callback(home);
     });
   }
 }

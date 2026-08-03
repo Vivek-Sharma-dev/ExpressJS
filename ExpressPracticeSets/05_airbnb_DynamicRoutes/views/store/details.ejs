@@ -1,12 +1,94 @@
 <%- include("../includes/head.ejs") %>
 </head>
 
-<body>
-    
+<body class="bg-gray-50">
   <%- include("../includes/nav.ejs") %>
 
-  <main>
-    <h1>Home Details</h1>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <% if (home) { %>
+      <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8">
+        <section class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+          <div class="h-96 overflow-hidden">
+            <img
+              src="<%= home.image || 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80' %>"
+              alt="<%= home.homeName %>"
+              class="w-full h-full object-cover"
+            />
+          </div>
+
+          <div class="p-8">
+            <form action="/store/favourites" method="post">
+              <input type="hidden" id="homeId" name="homeId" value="<%= home.id %>">
+              <% if(!home.isFavourite) { %> 
+              <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors duration-200">
+                Add to Favourites
+              </button>
+              <% } else { %>
+                <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors duration-200">
+                  Remove from Favourites
+                </button>
+              <% } %>
+            </form>
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div>
+                <h1 class="text-3xl font-bold text-gray-900"><%= home.homeName %></h1>
+                <p class="text-lg text-gray-600 mt-2">📍 <%= home.location || 'Location not specified' %></p>
+              </div>
+              <div class="bg-red-50 text-red-700 px-4 py-2 rounded-full font-semibold">
+                ⭐ <%= home.rating || '4.8' %>/5
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div class="bg-gray-50 rounded-2xl p-4">
+                <p class="text-sm text-gray-500">Price</p>
+                <p class="text-2xl font-bold text-gray-900">$<%= home.price || '99' %></p>
+              </div>
+              <div class="bg-gray-50 rounded-2xl p-4">
+                <p class="text-sm text-gray-500">Type</p>
+                <p class="text-xl font-semibold text-gray-900">Luxury Home</p>
+              </div>
+              <div class="bg-gray-50 rounded-2xl p-4">
+                <p class="text-sm text-gray-500">Availability</p>
+                <p class="text-xl font-semibold text-gray-900">Instant Book</p>
+              </div>
+            </div>
+
+            <div class="border-t border-gray-200 pt-6">
+              <h2 class="text-xl font-semibold text-gray-900 mb-3">Why guests love this place</h2>
+              <p class="text-gray-600 leading-relaxed">
+                This beautifully designed home combines comfort, privacy, and stunning views. Enjoy a relaxing stay with modern interiors, premium amenities, and a location that feels truly special.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <aside class="space-y-6">
+          <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Book this stay</h2>
+            <p class="text-gray-600 mb-6">Reserve your next getaway and make unforgettable memories.</p>
+            <a href="/store/booking" class="block text-center w-full py-3 px-4 bg-gradient-to-r from-red-500 to-red-600 text-white font-bold rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200">
+              Reserve Now
+            </a>
+          </div>
+
+          <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Included features</h3>
+            <ul class="space-y-2 text-gray-600">
+              <li>• Free Wi-Fi</li>
+              <li>• Fully equipped kitchen</li>
+              <li>• Swimming pool access</li>
+              <li>• Outdoor terrace</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    <% } else { %>
+      <div class="bg-white rounded-3xl shadow-xl p-10 text-center border border-gray-100">
+        <h1 class="text-3xl font-bold text-gray-900 mb-3">Home not found</h1>
+        <p class="text-gray-600">The requested property could not be found.</p>
+      </div>
+    <% } %>
   </main>
 
   <%- include("../includes/footer.ejs") %>

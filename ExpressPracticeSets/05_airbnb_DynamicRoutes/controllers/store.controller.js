@@ -1,15 +1,14 @@
 import { Home } from "../models/home.js";
 
 export const showHomePage = (req, res) => {
-  Home.getAllHomes( registeredHomes => {
+  Home.getAllHomes((registeredHomes) => {
     res.render("store/index", {
-    registeredHomes,
-    title: "Home - Airbnb",
-    currentPage: "home",
+      registeredHomes,
+      title: "Home - Airbnb",
+      currentPage: "home",
+    });
+    console.log("Registered Homes:", registeredHomes);
   });
-  console.log("Registered Homes:", registeredHomes);
-  });
-  
 };
 
 export const showDetailsPage = (req, res) => {
@@ -37,11 +36,24 @@ export const showBookingPage = (req, res) => {
     title: "Booking - Airbnb",
     currentPage: "booking",
   });
-}
+};
 
 export const showFavouritesPage = (req, res) => {
   res.render("store/favourites", {
     title: "Favourites - Airbnb",
     currentPage: "favourites",
   });
-}
+};
+
+export const addToFavourites = (req, res) => {
+  const homeId = req.body.homeId;
+  Home.addFavouriteHome(homeId, (home) => {
+    if (!home) {
+      return res
+        .status(400)
+        .send(`Home with ID ${homeId} is already in favourites`);
+    }
+  });
+
+  res.redirect("/store/favourites");
+};
